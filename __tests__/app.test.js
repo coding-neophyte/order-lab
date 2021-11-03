@@ -27,4 +27,14 @@ describe('03_separation-of-concerns-demo routes', () => {
         });
       });
   });
+
+  it.only('responds with an array of all orders', () => {
+    return request(app).get('/api/v1/orders')
+      .then(res => {
+        expect(res.body).toEqual(expect.arrayContaining([{
+          id: '1',
+          quantity: 10
+        }]));
+      });
+  });
 });
