@@ -1,15 +1,15 @@
 const pool = require('../lib/utils/pool');
-const twilio = require('twilio');
 const setup = require('../data/setup');
-const request = require('supertest');
-const app = require('../lib/app');
 const Order = require('../lib/models/Order');
-const { sendSms } = require('../lib/utils/twilio');
 const OrderService = require('../lib/services/OrderService');
 // const { update } = require('../lib/models/Order');
 
 
-
+jest.mock('twilio', () => () => ({
+  messages: {
+    create: jest.fn()
+  }
+}));
 
 describe('get all', () => {
   beforeEach(() => {
@@ -18,6 +18,11 @@ describe('get all', () => {
   beforeEach(async() => {
     return await Order.insert(3);
   });
+  afterAll(() => {
+    return pool.end();
+
+  });
+
 
   it('creates order and sends message', async() => {
     const newOrder = await OrderService.createOrder(1);
@@ -61,3 +66,5 @@ describe('get all', () => {
 
 
 });
+
+// all test complete

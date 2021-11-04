@@ -1,8 +1,5 @@
 const pool = require('../lib/utils/pool');
-const twilio = require('twilio');
 const setup = require('../data/setup');
-const request = require('supertest');
-const app = require('../lib/app');
 const Order = require('../lib/models/Order');
 
 
@@ -13,6 +10,11 @@ describe('get all', () => {
   beforeEach(async() => {
     return await Order.insert(3);
   });
+  afterAll(() => {
+    return pool.end();
+
+  });
+
 
   it('adds a new order', async() => {
     const expected =
