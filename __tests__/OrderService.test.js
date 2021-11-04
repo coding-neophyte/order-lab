@@ -5,7 +5,11 @@ const OrderService = require('../lib/services/OrderService');
 // const { update } = require('../lib/models/Order');
 
 
-
+jest.mock('twilio', () => () => ({
+  messages: {
+    create: jest.fn()
+  }
+}));
 
 describe('get all', () => {
   beforeEach(() => {
