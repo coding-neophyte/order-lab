@@ -17,6 +17,11 @@ describe('03_separation-of-concerns-demo routes', () => {
   beforeEach(async() => {
     return await Order.insert(3);
   });
+  afterAll(() => {
+    return pool.end();
+
+  });
+
 
 
   it('creates a new order in our database and sends a text message', () => {

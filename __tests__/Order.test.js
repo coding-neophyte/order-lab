@@ -10,6 +10,11 @@ describe('get all', () => {
   beforeEach(async() => {
     return await Order.insert(3);
   });
+  afterAll(() => {
+    return pool.end();
+
+  });
+
 
   it('adds a new order', async() => {
     const expected =

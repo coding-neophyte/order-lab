@@ -14,6 +14,11 @@ describe('get all', () => {
   beforeEach(async() => {
     return await Order.insert(3);
   });
+  afterAll(() => {
+    return pool.end();
+
+  });
+
 
   it('creates order and sends message', async() => {
     const newOrder = await OrderService.createOrder(1);
