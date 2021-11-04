@@ -14,6 +14,15 @@ describe('get all', () => {
     return await Order.insert(3);
   });
 
+  it('adds a new order', async() => {
+    const expected =
+
+        { id: expect.any(String), quantity: expect.any(Number) };
+
+
+    expect(await Order.insert(2)).toEqual(expected);
+  });
+
   it('returns an array of orders', async() => {
     const expected =
       [
